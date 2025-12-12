@@ -1,124 +1,138 @@
 class AdaptiveLearner:
     """
-    A conceptual class implementing the ALF Framework principles
-    for systematic error diagnosis and learning.
+    Conceptuele klasse die de ALF-principes volgt:
+    Fase 1: Diagnose
+    Fase 2: Hypothese & Drill
+    Fase 3: Validatie & Integratie
     """
 
-    def __init__(self, topic):
+    def __init__(self, topic: str):
         self.topic = topic
         self.history = []
         print(f"--- Adaptive Learner Initialized for: {topic} ---")
-        
-    def phase1_diagnose_isolate(self, question, student_input):
-        """
-        PHASE 1: Diagnostics and Isolation (Context Removal)
-        Identifies the precise point of error.
-        """
-        # 1. Error Pinpointing (Simulated)
-        # In a real AI, this would involve NLP/Code Analysis
-        analysis_report = self._analyze_error(question, student_input)
-        
-        # 2. History Tracking
+
+    # ---------- FASE 1: DIAGNOSE ----------
+
+    def phase1_diagnose_isolate(self, question: str, student_input: str) -> dict:
+        report = self._analyze_error(question, student_input)
+
         self.history.append({
             "phase": 1,
-            "input": student_input,
-            "report": analysis_report
+            "question": question,
+            "student_input": student_input,
+            "report": report,
         })
-        
+
         print("\n[PHASE 1: DIAGNOSED]")
-        print(f"Error Identified: {analysis_report['error_type']}")
-        print(f"Details: {analysis_report['details']}")
-        return analysis_report
+        print(f"Error Identified: {report['error_type']}")
+        print(f"Details: {report['details']}")
+        return report
 
-    def phase2_hypothesize_adapt(self, error_report, student_hypothesis):
-        """
-        PHASE 2: Hypothesis and Adaptation (Adaptive Drill Creation)
-        Explains the cause and creates a targeted drill.
-        """
-        # 1. Causal Hypothesis Check (Simulated)
-        if error_report['error_type'] == "Incorrect Operator":
-            explanation = "Error is due to confusing multiplication with addition (ALGEBRAIC NOTATION)."
-            drill_type = "Operator Drill"
+    # ---------- FASE 2: HYPOTHESE & DRILL ----------
+
+    def phase2_hypothesize_adapt(self, error_report: dict, student_hypothesis: str) -> dict:
+        error_type = error_report.get("error_type", "Unknown")
+
+        if "Operator" in error_type:
+            explanation = "Error is due to confusing operations and ignoring exponents (order of operations)."
+            drill_type = "operator"
         else:
-            explanation = "The error requires an explanation of a fundamental concept."
-            drill_type = "Conceptual Drill"
+            explanation = "Error seems conceptual; focus on the underlying formula."
+            drill_type = "concept"
 
-        # 2. Anatomical/Technical Explanation
         print("\n[PHASE 2: EXPLAINED & ADAPTED]")
         print(f"Explanation: {explanation}")
-        
-        # 3. Adaptive Drill Creation (Generate a practice problem)
-        drill_problem = self._create_drill(drill_type)
-        
+
+        drill = self._create_drill(drill_type)
+
         self.history.append({
             "phase": 2,
-            "hypothesis": student_hypothesis,
-            "drill": drill_problem
+            "student_hypothesis": student_hypothesis,
+            "drill": drill,
         })
-        
-        return drill_problem
 
-    def phase3_validate_integrate(self, drill_result):
-        """
-        PHASE 3: Validation and Integration (Contextual Validation)
-        Confirms the fix and integrates the skill.
-        """
-        # 1. Validation Check (Simulated)
-        if drill_result['is_correct']:
+        return drill
+
+    # ---------- FASE 3: VALIDATIE & INTEGRATIE ----------
+
+    def phase3_validate_integrate(self, drill_result: dict):
+        is_correct = drill_result.get("is_correct", False)
+
+        if is_correct:
             print("\n[PHASE 3: VALIDATED]")
             print("Drill successful. Re-integrating skill with a complex problem...")
-            
-            # 2. Contextual Validation (e.g., a multi-step word problem)
             final_test = self._create_final_test()
+            self.history.append({
+                "phase": 3,
+                "drill_result": drill_result,
+                "final_test": final_test,
+            })
             return final_test
-        else:
-            print("\n[PHASE 3: FAILED VALIDATION]")
-            print("Drill failed. Returning to Phase 2 for a new drill.")
-            return None
 
-    # --- Internal Simulation Methods ---
-    def _analyze_error(self, q, a):
-        # Placeholder logic based on our Physics chat
-        if '+' in a and 'x' not in a and 'squared' not in a:
+        print("\n[PHASE 3: FAILED VALIDATION]")
+        print("Drill failed. Returning to Phase 2 for a new drill.")
+        self.history.append({
+            "phase": 3,
+            "drill_result": drill_result,
+            "final_test": None,
+        })
+        return None
+
+    # ---------- INTERNE METHODEN ----------
+
+    def _analyze_error(self, question: str, answer: str) -> dict:
+        if "+" in answer and "x" not in answer and "squared" not in answer and "**2" not in answer:
             return {
                 "error_type": "Incorrect Operator & Missing Exponent",
-                "details": "Used '+' instead of '*' and failed to apply '**2' (v-squared).",
-                "correct_answer": "125 J"
+                "details": "Used '+' instead of '*' and failed to apply the square on velocity.",
+                "correct_answer": "125 J",
             }
-        # Simplified for demonstration
-        return {"error_type": "Conceptual Confusion", "details": "Unclear input."}
+        return {
+            "error_type": "Conceptual Confusion",
+            "details": "Answer does not follow the expected structure for the formula.",
+        }
 
-    def _create_drill(self, drill_type):
-        if drill_type == "Operator Drill":
-            return "PRACTICE: Calculate 5 + 3 * 2 AND (5 + 3) * 2. Focus on order."
-        return "PRACTICE: What is the formula for Kinetic Energy?"
+    def _create_drill(self, drill_type: str) -> dict:
+        if drill_type == "operator":
+            return {
+                "id": "drill_operator_1",
+                "type": "order_of_operations",
+                "prompt": "Compute 5 + 3 * 2 and (5 + 3) * 2. Explain why they differ.",
+            }
+        return {
+            "id": "drill_concept_ke_formula_1",
+            "type": "kinetic_energy_formula",
+            "prompt": "Write the formula for kinetic energy and label each symbol.",
+        }
 
-    def _create_final_test(self):
-        return "FINAL TEST: A 5kg object moving at 20 m/s accelerates to 30 m/s. What is the CHANGE in Kinetic Energy?"
+    def _create_final_test(self) -> dict:
+        return {
+            "id": "final_ke_change_1",
+            "type": "integration_problem",
+            "prompt": (
+                "A 5 kg object moves at 20 m/s and accelerates to 30 m/s.\n"
+                "What is the change in kinetic energy?"
+            ),
+        }
 
-# --- Execution Example (Simulating our Physics Chat) ---
 
-# Initialize the Learner
-learner = AdaptiveLearner("Kinetic Energy Formula")
+# --------- VOORBEELD-GEBRUIK ---------
 
-# STUDENT: Submits their first incorrect attempt
-q_p1 = "E_k = 1/2 * m * v^2"
-a_p1 = "1 divided by 2 + 2,5kg multiplied by 10m/s"
+if __name__ == "__main__":
+    learner = AdaptiveLearner("Kinetic Energy Formula")
 
-# PHASE 1 EXECUTION
-report = learner.phase1_diagnose_isolate(q_p1, a_p1)
+    q_p1 = "E_k = 1/2 * m * v^2"
+    a_p1 = "1 divided by 2 + 2,5kg multiplied by 10m/s"
 
-# STUDENT: Proposes a hypothesis (e.g., "I forgot the Order of Operations.")
-student_hyp = "I forgot that multiplication precedes addition, and exponents go first."
+    report = learner.phase1_diagnose_isolate(q_p1, a_p1)
 
-# PHASE 2 EXECUTION
-drill = learner.phase2_hypothesize_adapt(report, student_hyp)
-print(f"Generated Drill: {drill}")
+    student_hyp = "I forgot order of operations and that velocity must be squared."
+    drill = learner.phase2_hypothesize_adapt(report, student_hyp)
+    print(f"\nGenerated Drill:\n{drill['prompt']}")
 
-# STUDENT: Solves the drill correctly (Simulated Success)
-drill_success = {"is_correct": True, "result": "125"}
+    drill_success = {"is_correct": True, "result": "125"}
+    final_test = learner.phase3_validate_integrate(drill_success)
 
-# PHASE 3 EXECUTION
-final_test = learner.phase3_validate_integrate(drill_success)
-if final_test:
-    print(f"Final Integration Test Generated: {final_test}")
+    if final_test:
+        print("\nFinal Integration Test Generated:")
+        print(final_test["prompt"])

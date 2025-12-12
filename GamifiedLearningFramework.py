@@ -1,22 +1,27 @@
-class GamifiedLearner:
-    """GEAR Framework: Focuses on encouraging, relatable, and fun feedback."""
+if __name__ == "__main__":
+    learner = AdaptiveLearner("Kinetic Energy Formula")
 
-    def phase1_spot_the_glitch(self, question, student_input):
-        analysis_report = self._analyze_error_friendly(question, student_input)
-        
-        print("\n🚀 **Spot the Glitch!**")
-        print(f"**Oopsie Finder Report:** {analysis_report['friendly_error']}")
-        # Instead of just variables, use analogies
-        print("💡 **Think of it like cooking:** You added sugar when the recipe said salt!")
-        return analysis_report
+    while True:
+        print("\n--- NEW CYCLE (type 'quit' to stop) ---")
+        student_answer = input("Your answer to E_k = 1/2 * m * v^2: ")
 
-    def phase2_level_up(self, error_report):
-        explanation = self._get_relatable_explanation(error_report)
-        drill_problem = self._create_drill_relatable(error_report)
-        
-        print("\n💪 **Time to Level Up!**")
-        print(f"**Why it matters:** {explanation}")
-        print(f"**Challenge:** {drill_problem}")
-        return drill_problem
+        if student_answer.lower().strip() in {"quit", "exit"}:
+            print("Exiting tutor. Goodbye.")
+            break
 
-    # ... and so on for Phase 3 (Final Boss Test)
+        report = learner.phase1_diagnose_isolate(
+            "E_k = 1/2 * m * v^2",
+            student_answer
+        )
+
+        hypothesis = input("Why do you think this was wrong? ")
+        drill = learner.phase2_hypothesize_adapt(report, hypothesis)
+        print(f"\nDRILL:\n{drill['prompt']}")
+
+        drill_input = input("\nDid you solve this drill correctly? (y/n): ")
+        drill_result = {"is_correct": drill_input.lower().startswith("y")}
+        final_test = learner.phase3_validate_integrate(drill_result)
+
+        if final_test:
+            print("\nFINAL TEST:")
+            print(final_test["prompt"])
