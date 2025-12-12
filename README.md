@@ -12,6 +12,8 @@ De kern van de `AdaptiveLearner` is de gestructureerde, **drie-fasen leerlus** (
 
 De huidige implementatie richt zich op de **kinetische energie formule** ($E_k = \frac{1}{2}mv^2$), maar het onderliggende patroon is algemeen en kan worden toegepast op elk technisch of conceptueel onderwerp.
 
+🔗 Live Demo: Test het ALF/GEAR Framework direct in uw browser via de Google Colab Notebook: https://colab.research.google.com/drive/1NCitFl4TUaE5bap72ekAWHhjYzSRsR2N?usp=sharing
+
 ---
 
 ## ✨ Features
