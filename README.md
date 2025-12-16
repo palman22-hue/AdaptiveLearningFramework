@@ -1,7 +1,6 @@
 # 💡 AdaptiveLearner – ALF-Inspired Mini Tutor
 
-.. image:: https://zenodo.org/badge/1115331365.svg
-  :target: https://doi.org/10.5281/zenodo.17956048
+https://zenodo.org/badge/1115331365.svg
 
 ## 🎯 Project Overzicht
 
