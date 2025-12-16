@@ -1,5 +1,7 @@
 # 💡 AdaptiveLearner – ALF-Inspired Mini Tutor
 
+10.5281/zenodo.17956049
+
 ## 🎯 Project Overzicht
 
 De `AdaptiveLearner` is een **conceptuele Python-klasse** die de logica van een adaptief leerframework implementeert. Het hoofddoel is om de inefficiëntie van traditioneel leren aan te pakken door elke studentfout direct om te zetten in een gerichte, leerzame oefening.
