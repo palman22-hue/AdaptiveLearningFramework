@@ -1,0 +1,22 @@
+{
+  "topic": "Algebra — Linear Equations",
+  "question": "Los op: 2x + 3 = 11",
+  "correct_answer": "x = 4",
+
+  "common_errors": [
+    {
+      "pattern": "wrong_isolation",
+      "description": "Student trekt 3 niet correct af van beide kanten.",
+      "drill_prompt": "Los op: 3x + 5 = 20. Schrijf elke stap expliciet op."
+    },
+    {
+      "pattern": "sign_error",
+      "description": "Student maakt een tekenfout bij het verplaatsen van termen.",
+      "drill_prompt": "Leg uit waarom -5 naar de andere kant +5 wordt."
+    }
+  ],
+
+  "integration_test": {
+    "prompt": "Los op: 5x - 7 = 18"
+  }
+}

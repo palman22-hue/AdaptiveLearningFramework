@@ -1,0 +1,22 @@
+{
+  "topic": "Physics — Newton's Second Law",
+  "question": "Bereken de kracht: m = 4 kg, a = 3 m/s^2",
+  "correct_answer": "F = 12 N",
+
+  "common_errors": [
+    {
+      "pattern": "formula_confusion",
+      "description": "Student verwart F = m * a met F = m / a.",
+      "drill_prompt": "Schrijf de formule voor kracht en label elke variabele."
+    },
+    {
+      "pattern": "unit_error",
+      "description": "Student gebruikt verkeerde eenheden of vergeet N.",
+      "drill_prompt": "Welke eenheid hoort bij kracht en waarom?"
+    }
+  ],
+
+  "integration_test": {
+    "prompt": "Een object van 10 kg versnelt met 1.5 m/s^2. Bereken de kracht."
+  }
+}

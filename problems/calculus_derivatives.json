@@ -1,0 +1,22 @@
+{
+  "topic": "Calculus — Derivatives",
+  "question": "Bereken de afgeleide van f(x) = 3x^2 + 4x - 5",
+  "correct_answer": "f'(x) = 6x + 4",
+
+  "common_errors": [
+    {
+      "pattern": "power_rule_mistake",
+      "description": "Student past de power rule verkeerd toe.",
+      "drill_prompt": "Pas de power rule toe op: g(x) = 5x^3."
+    },
+    {
+      "pattern": "constant_rule_error",
+      "description": "Student vergeet dat de afgeleide van een constante 0 is.",
+      "drill_prompt": "Wat is de afgeleide van h(x) = 7?"
+    }
+  ],
+
+  "integration_test": {
+    "prompt": "Bereken de afgeleide van f(x) = x^3 - 2x + 1"
+  }
+}
