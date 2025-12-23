@@ -89,8 +89,20 @@ selected_topic = st.selectbox(
 # -----------------------------
 
 if st.session_state.learner is None or st.session_state.learner.topic != selected_topic:
-    with open(os.path.join(problem_dir, selected_topic + ".json"), "r") as f:
-        problem_data = json.load(f)
+    # Stop if no topic selected yet
+if not selected_topic:
+    st.info(T["choose_topic"])
+    st.stop()
+
+json_path = os.path.join(problem_dir, selected_topic + ".json")
+
+if not os.path.exists(json_path):
+    st.error(f"JSON file not found: {json_path}")
+    st.stop()
+
+with open(json_path, "r") as f:
+    problem_data = json.load(f)
+
 
     # Initialize learner via the engine (CORRECT PLACE)
     st.session_state.learner = AdaptiveLearningFramework.initialize_learner(problem_data)
