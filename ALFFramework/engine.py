@@ -40,7 +40,7 @@ problem_bank = ProblemBank()
 # 2. ADAPTIVE LEARNER (maakt gebruik van JSON-problemen)
 # ============================================================
 
-class AdaptiveLearner:
+class AdaptiveLearningFramework:
     def __init__(self, topic):
         self.topic = topic
         self.problem = problem_bank.get(topic)

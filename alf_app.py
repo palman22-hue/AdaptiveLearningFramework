@@ -1,7 +1,7 @@
 import streamlit as st
 import json
 import os
-from ALFFramework import AdaptiveLearningFramework   # FIXED IMPORT
+from ALFFramework.engine import AdaptiveLearningFramework   # FIXED IMPORT
 
 # -----------------------------
 # LANGUAGE SYSTEM
