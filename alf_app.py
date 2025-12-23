@@ -1,7 +1,7 @@
 import streamlit as st
 import json
 import os
-from engine import AdaptiveLearningFramework   # <-- BELANGRIJK
+from ALFFramework.engine import AdaptiveLearningFramework   # <-- BELANGRIJK
 
 # -----------------------------
 # LANGUAGE SYSTEM
