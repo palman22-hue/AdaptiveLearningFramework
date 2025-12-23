@@ -2,6 +2,7 @@ import streamlit as st
 from ALFFramework import ProblemBank, AdaptiveLearner
 
 bank = ProblemBank()
+topics = list(bank.problems.keys())
 problem = bank.get("Kinetic Energy")
 topics = list(bank.problems.keys())
 selected_topic = st.selectbox("Kies een onderwerp:", topics)
@@ -32,10 +33,23 @@ st.markdown("""
 # -------------------------------
 # INITIALIZE LEARNER
 # -------------------------------
-if "learner" not in st.session_state:
-    st.session_state.learner = AdaptiveLearner("Kinetic Energy")
+if "selected_topic" not in st.session_state:
+    st.session_state.selected_topic = topics[0]
+
+st.session_state.selected_topic = st.selectbox(
+    "Kies een onderwerp:",
+    topics,
+    index=topics.index(st.session_state.selected_topic),
+    key="topic_selector"
+)
+
+
+if "learner" not in st.session_state or \
+   st.session_state.learner.topic != st.session_state.selected_topic:
+    st.session_state.learner = AdaptiveLearner(st.session_state.selected_topic)
 
 learner = st.session_state.learner
+
 
 # -------------------------------
 # PHASE 1 — DIAGNOSE
