@@ -1,0 +1,29 @@
+{
+  "topic": "Chemistry — Moles",
+
+  "question": "Calculate the number of moles in 18 grams of water (H₂O).",
+
+  "correct_answer": "1 mol",
+
+  "common_errors": [
+    {
+      "pattern": "wrong_formula",
+      "description": "The student used an incorrect molar mass formula.",
+      "drill_prompt": "Write the correct molar mass formula for H₂O and calculate it step by step."
+    },
+    {
+      "pattern": "divide_incorrectly",
+      "description": "The student divided grams by the wrong molar mass.",
+      "drill_prompt": "Use the formula n = m / M. Compute n for 18 g of H₂O."
+    },
+    {
+      "pattern": "unit_confusion",
+      "description": "The student confused grams, moles, or molar mass units.",
+      "drill_prompt": "Explain the difference between grams, molar mass (g/mol), and moles."
+    }
+  ],
+
+  "integration_test": {
+    "prompt": "How many moles are in 44 grams of CO₂?"
+  }
+}
