@@ -1,7 +1,7 @@
 import streamlit as st
 import json
 import os
-from ALFFramework import AdaptiveLearner
+from ALFFramework import AdaptiveLearningFramework   # FIXED IMPORT
 
 # -----------------------------
 # LANGUAGE SYSTEM
@@ -89,22 +89,21 @@ selected_topic = st.selectbox(
 # -----------------------------
 
 if st.session_state.learner is None or st.session_state.learner.topic != selected_topic:
-    # Stop if no topic selected yet
-   if not selected_topic:
-       st.info(T["choose_topic"])
-       st.stop()
 
-   json_path = os.path.join(problem_dir, selected_topic + ".json")
+    if not selected_topic:
+        st.info(T["choose_topic"])
+        st.stop()
 
-   if not os.path.exists(json_path):
-       st.error(f"JSON file not found: {json_path}")
-       st.stop()
+    json_path = os.path.join(problem_dir, selected_topic + ".json")
 
-   with open(json_path, "r") as f:
-       problem_data = json.load(f)
+    if not os.path.exists(json_path):
+        st.error(f"JSON file not found: {json_path}")
+        st.stop()
 
+    with open(json_path, "r") as f:
+        problem_data = json.load(f)
 
-    # Initialize learner via the engine (CORRECT PLACE)
+    # Initialize learner via the engine
     st.session_state.learner = AdaptiveLearningFramework.initialize_learner(problem_data)
 
 # -----------------------------
