@@ -1,97 +1,125 @@
-Adaptive Learning Framework (ALF)
-
-A modular, open‑source engine for adaptive STEM education.
+📘 Adaptive Learning Framework (ALF)
+A modular, bilingual, open‑source engine for adaptive STEM education.
 
 🚀 Overview
+The Adaptive Learning Framework (ALF) is a lightweight, extensible system designed to diagnose student misconceptions, generate targeted drills, and verify understanding through integration tests. It is fully modular, JSON‑driven, and built for both research and practical classroom use.
 
-The Adaptive Learning Framework (ALF) is a lightweight, modular system designed to diagnose student misconceptions, generate targeted drills, and verify understanding through integration tests. It is fully open‑source, easy to extend, and built for both research and practical classroom use.
+ALF now includes:
 
-ALF currently supports:
+🧠 A state‑machine Adaptive Learner
 
-🧠 A modular adaptive learning engine
+⚙️ A clean, modular engine (engine.py)
 
-🎛️ A Streamlit‑based user interface
+🎛️ A bilingual Streamlit UI (alf_app.py)
 
-📚 A JSON‑driven problem bank
+📚 A scalable JSON problem bank
 
-🔄 Multi‑topic support via a topic selector
+🌍 Full English + Dutch interface support
 
-🌐 Local execution and GitHub Codespaces compatibility
+🔄 Automatic topic loading and learner initialization
+
+🖼️ A visual evolution timeline (see /FotoDocs)
 
 ✨ Features
+🔍 Phase 1 — Diagnosis
+ALF analyzes student input and detects error patterns defined in each JSON module.
 
-🔍 Diagnostic Engine
+🎯 Phase 2 — Drill
+Based on the detected misconception, ALF generates a targeted drill prompt.
 
-ALF analyzes student answers and identifies common error patterns defined in each JSON module.
-
-🎯 Targeted Drills
-
-Based on the detected misconception, ALF generates a focused drill question to reinforce understanding.
-
-🧩 Integration Test
-
+🧩 Phase 3 — Integration Test
 After a correct drill response, ALF presents an integration test to confirm mastery.
 
-📚 JSON Problem Bank
+📁 JSON‑Driven Problem Bank
+Each topic is defined as a standalone JSON file, making the system easy to extend.
 
-Each topic is defined as a standalone JSON file, making it easy to add or modify content.
+🌐 Bilingual UI
+The interface supports English and Dutch, selectable via the sidebar.
 
-🌍 Multi‑Language Support
+🧱 Modular Architecture
+Engine, learner, UI, and content are cleanly separated for clarity and scalability.
 
-ALF supports both English and Dutch, with more languages planned.
+📂 Project Structure
 
-📁 Project Structure
-
-ALFFramework/
+AdaptiveLearningFramework/
 │
-├── alf_app.py          # Streamlit UI
-├── ALFFramework.py     # Adaptive learning engine
-├── alf_cli.py          # Command-line interface
+├── alf_app.py               # Streamlit UI (bilingual)
+├── engine.py                # Adaptive engine + learner state machine
+├── alf_cli.py               # Optional CLI interface
 │
-├── problems/           # JSON problem modules
-│   ├── algebra_linear.json
-│   ├── calculus_derivatives.json
-│   └── physics_newton2.json
+├── problems/                # JSON problem modules
+│   ├── kinetic_energy.json
+│   ├── chemistry_moles.json
+│   └── ...
 │
-└── README.md           # Documentation
+├── FotoDocs/                # Evolution photos of the framework
+│
+├── README.md                # Documentation
+└── LICENSE
 
 🧪 Example JSON Module
 
 {
-  "topic": "Calculus — Derivatives",
-  "question": "Compute the derivative of f(x) = 3x^2 + 4x - 5",
-  "correct_answer": "f'(x) = 6x + 4",
+  "topic": "Chemistry — Moles",
+  "question": "Calculate the number of moles in 18 grams of water (H₂O).",
+  "correct_answer": "1 mol",
 
   "common_errors": [
     {
-      "pattern": "power_rule_mistake",
-      "description": "Incorrect application of the power rule.",
-      "drill_prompt": "Apply the power rule to g(x) = 5x^3."
+      "pattern": "wrong_formula",
+      "description": "The student used an incorrect molar mass formula.",
+      "drill_prompt": "Write the correct molar mass formula for H₂O and calculate it step by step."
     }
   ],
 
   "integration_test": {
-    "prompt": "Compute the derivative of f(x) = x^3 - 2x + 1"
+    "prompt": "How many moles are in 44 grams of CO₂?"
   }
 }
 
-🏁 Getting Started
+🖥️ Running the App
 
-Run locally
+Local Execution
 
 pip install -r requirements.txt
 streamlit run alf_app.py
 
+🌍 Bilingual Interface
+The UI automatically adapts based on the selected language:
 
-Run in GitHub Codespaces
-Just open the repo in Codespaces — everything is preconfigured.
+English
+
+Nederlands
+
+This affects UI labels, not the content of the JSON modules, keeping the problem bank language‑agnostic.
+
+📸 Evolution of the Framework
+The /FotoDocs folder contains images documenting the growth of ALF from early prototypes to the current modular architecture.
+
+These images illustrate:
+
+the initial concept
+
+the first working adaptive loop
+
+the final bilingual, modular system
+
+This visual history is part of ALF’s identity and open‑source transparency.
 
 🤝 Contributing
 Contributions are welcome!
-You can add new JSON modules, improve the engine, or extend the UI.
+
+You can help by:
+
+adding new JSON problem modules
+
+improving the engine
+
+extending the UI
+
+adding new languages
+
+refining documentation
 
 📜 License
 This project is licensed under the GPL‑3.0 License.
-
-
-
