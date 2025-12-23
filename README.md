@@ -1,159 +1,97 @@
-🎓Adaptive Learning Framework (ALF) — Versie 2
-    
-   - Diagnose → Hypothese → Drill → Integratie
-    
-   - Een open, modulair en uitbreidbaar leerframework voor STEM‑onderwijs
+Adaptive Learning Framework (ALF)
 
----
+A modular, open‑source engine for adaptive STEM education.
 
-🚀Over dit project
+🚀 Overview
 
-   - Het Adaptive Learning Framework (ALF) is een modulair systeem dat automatisch:
+The Adaptive Learning Framework (ALF) is a lightweight, modular system designed to diagnose student misconceptions, generate targeted drills, and verify understanding through integration tests. It is fully open‑source, easy to extend, and built for both research and practical classroom use.
 
-   - fouten van studenten diagnosticeert
+ALF currently supports:
 
-   - hypothesen over misconcepties vormt
+🧠 A modular adaptive learning engine
 
-   - gerichte drills genereert
+🎛️ A Streamlit‑based user interface
 
-   - en een integratie‑test aanbiedt om begrip te bevestigen
+📚 A JSON‑driven problem bank
 
-  Deze versie (v2) introduceert:
+🔄 Multi‑topic support via a topic selector
 
-   - een Streamlit‑interface
+🌐 Local execution and GitHub Codespaces compatibility
 
-   - een JSON‑gebaseerde probleembank
+✨ Features
 
-   - volledige GitHub Codespaces‑compatibiliteit
+🔍 Diagnostic Engine
 
-   - een opgeschoonde, schaalbare projectstructuur
+ALF analyzes student answers and identifies common error patterns defined in each JSON module.
 
-   - ALF is ontworpen om transparant, reproduceerbaar en uitbreidbaar te zijn —    ideaal voor onderzoek, onderwijs en open‑source samenwerking.
+🎯 Targeted Drills
 
----
+Based on the detected misconception, ALF generates a focused drill question to reinforce understanding.
 
-📁 Projectstructuur
+🧩 Integration Test
+
+After a correct drill response, ALF presents an integration test to confirm mastery.
+
+📚 JSON Problem Bank
+
+Each topic is defined as a standalone JSON file, making it easy to add or modify content.
+
+🌍 Multi‑Language Support
+
+ALF supports both English and Dutch, with more languages planned.
+
+📁 Project Structure
 
 ALFFramework/
-├── ALFFramework.py        # De ALF-engine (diagnose, drill, validatie)
-├── alf_app.py             # Streamlit UI
-├── problems/              # JSON-probleembank
-│   └── kinetic_energy.json
-└── README.md
+│
+├── alf_app.py          # Streamlit UI
+├── ALFFramework.py     # Adaptive learning engine
+├── alf_cli.py          # Command-line interface
+│
+├── problems/           # JSON problem modules
+│   ├── algebra_linear.json
+│   ├── calculus_derivatives.json
+│   └── physics_newton2.json
+│
+└── README.md           # Documentation
 
----
-
-🧭 Installatie in GitHub Codespaces
-
-1. Open de repository in Codespaces
-
-   - Ga naar de GitHub‑pagina van dit project
-
-   - Klik op Code
-
-   - Kies Codespaces → Create codespace on main
-
-   - Wacht tot de omgeving volledig geladen is
-
-2. Installeer de benodigde packages
-
-   - Open de terminal in Codespaces en voer uit:
-
-   - pip install streamlit
-
-(Andere dependencies worden automatisch opgepakt door Python.)
-
-3. Start de Streamlit‑app
-
-   - In de terminal:
-
-   - streamlit run alf_app.py
-
-   - Codespaces opent automatisch een browser‑preview met de werkende ALF‑interface.
-
----
-
-🧪 Hoe ALF werkt
-
-Fase 1 — Diagnose (🔍)
-    
-   - ALF analyseert het student‑antwoord en matcht het met foutpatronen uit de JSON‑module.
-
-Fase 2 — Hypothese & Drill (🧩)
-    
-   - ALF genereert een gerichte drill gebaseerd op het fouttype.
-
-Fase 3 — Validatie & Integratie (🚀)
-    
-   - Bij een correcte drill volgt een integratie‑test om begrip te bevestigen.
-
----
-
-📚 JSON‑Probleembank
-Alle STEM‑problemen worden opgeslagen in problems/ als JSON‑modules.
-
-Voorbeeld:
+🧪 Example JSON Module
 
 {
-  "topic": "Kinetic Energy",
-  "question": "E_k = 1/2 * m * v^2",
-  "correct_answer": "125 J",
+  "topic": "Calculus — Derivatives",
+  "question": "Compute the derivative of f(x) = 3x^2 + 4x - 5",
+  "correct_answer": "f'(x) = 6x + 4",
 
   "common_errors": [
     {
-      "pattern": "missing_exponent",
-      "description": "Student vergeet v^2 toe te passen.",
-      "drill_prompt": "Schrijf de formule voor kinetische energie en label elk symbool."
+      "pattern": "power_rule_mistake",
+      "description": "Incorrect application of the power rule.",
+      "drill_prompt": "Apply the power rule to g(x) = 5x^3."
     }
   ],
 
   "integration_test": {
-    "prompt": "Een object van 5 kg versnelt van 20 m/s naar 30 m/s. Wat is de verandering in kinetische energie?"
+    "prompt": "Compute the derivative of f(x) = x^3 - 2x + 1"
   }
 }
 
-Nieuwe onderwerpen toevoegen = simpelweg een nieuw JSON‑bestand toevoegen.
+🏁 Getting Started
 
----
+Run locally
 
-🧩 Onderwerpen uitbreiden
+pip install -r requirements.txt
+streamlit run alf_app.py
 
-Voeg nieuwe bestanden toe in problems/, zoals:
 
-   - algebra_linear.json
+Run in GitHub Codespaces
+Just open the repo in Codespaces — everything is preconfigured.
 
-   - calculus_derivatives.json
+🤝 Contributing
+Contributions are welcome!
+You can add new JSON modules, improve the engine, or extend the UI.
 
-   - physics_newton2.json
+📜 License
+This project is licensed under the GPL‑3.0 License.
 
-   - chemistry_moles.json
 
-ALF laadt ze automatisch.
 
----
-
-🌍 Waarom ALF bijzonder is
-
-   - Volledig modulair
-
-   - Open en transparant
-
-   - Schaalbaar naar honderden STEM‑onderwerpen
-
-   - Eenvoudig te integreren in andere systemen
-
-   - Perfect voor onderzoek naar adaptief leren
-
----
-
-🤝 Bijdragen
-
-    Pull requests, uitbreidingen en nieuwe JSON‑modules zijn welkom.
-    Samen bouwen we een open ecosysteem voor STEM‑onderwijs.
-
----    
-
-🧠 Credits
-
-    Ontwikkeld door Esteban Palman    
-    Met een focus op modulariteit, transparantie en schaalbaarheid in STEM‑onderwijs.

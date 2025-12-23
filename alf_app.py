@@ -8,6 +8,46 @@ topics = list(bank.problems.keys())
 selected_topic = st.selectbox("Kies een onderwerp:", topics)
 problem = bank.get(selected_topic)
 
+LANGUAGES = {
+    "English": "en",
+    "Nederlands": "nl"
+}
+
+if "language" not in st.session_state:
+     st.session_state.language = "English"
+     
+st.session_state.language = st.sidebar.selectbox(
+    "Language / Taal",
+    list(LANGUAGES.keys()),
+    key="language_selector" 
+)
+
+lang = LANGUAGES[st.session_state.language]
+
+
+TEXT = {
+    "en": {
+        "choose_topic": "Choose a topic:",
+        "your_answer": "Your answer:",
+        "submit": "Submit",
+        "correct": "Correct!",
+        "incorrect": "Incorrect.",
+        "drill_question": "Drill question:",
+        "integration_test": "Integration test:"
+    },
+    "nl": {
+        "choose_topic": "Kies een onderwerp:",
+        "your_answer": "Jouw antwoord:",
+        "submit": "Versturen",
+        "correct": "Goed!",
+        "incorrect": "Fout.",
+        "drill_question": "Drill vraag:",
+        "integration_test": "Integratietest:"
+    }
+}
+
+st.selectbox(TEXT[lang]["choose_topic"], topics, key="topic_selector")
+
 
 # -------------------------------
 # PAGE CONFIG
