@@ -33,6 +33,19 @@ def render_explanation(explanation_data, language):
         st.write(meaning)
         st.markdown("---")
 
+
+# ---------------------------------------------------------
+# 3. OPTIONAL VALIDATION FUNCTION
+# ---------------------------------------------------------
+def validate_explanation(topic, explanation_data):
+    if topic.startswith("Algebra"):
+        for concept in explanation_data.get("concepts", []):
+            if "moles" in concept.get("meaning", "").lower():
+                return False
+    return True
+
+
+
 # ---------------------------------------------------------
 # 3. LOAD ENGINE (engine loads its own ProblemBank)
 # ---------------------------------------------------------
@@ -67,8 +80,17 @@ st.write(problem_data["question"])
 # ---------------------------------------------------------
 # 6. EXPLAIN BUTTON
 # ---------------------------------------------------------
+
 if st.button("Explain" if language == "English" else "Leg uit"):
-    render_explanation(problem_data.get("explanation"), language)
+    explanation_data = problem_data.get("explanation")
+    if explanation_data:
+        if validate_explanation(selected_topic, explanation_data):
+            render_explanation(explanation_data, language)
+        else:
+            st.warning("Explanation seems mismatched for this topic.")
+    else:
+        st.info("No explanation available for this topic.")
+
 
 # ---------------------------------------------------------
 # 7. USER INPUT
