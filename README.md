@@ -1,6 +1,6 @@
 📘 Adaptive Learning Framework (ALF)
 
-[![DOI](https://zenodo.org/badge/1121764509.svg)](https://doi.org/10.5281/zenodo.18035787)
+[![DOI](https://zenodo.org/badge/1115331365.svg)](https://doi.org/10.5281/zenodo.17956048)
 
 A modular, bilingual, open‑source engine for adaptive STEM education.
 
